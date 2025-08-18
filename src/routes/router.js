@@ -9,7 +9,7 @@ router.post("/add", createDoctor)
 router.get("/all", getDoctors)
 router.get("/single/:id", getDoctorById)
 router.delete("/delete/:id", deleteDoctor)
-router.get("/edit/:id", updateDoctor)
+router.put("/edit/:id", updateDoctor)
 
 
 
