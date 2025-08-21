@@ -3,11 +3,15 @@ import mongoose from "mongoose";
 const appointmentSchema = new mongoose.Schema(
   {
     patientId: {
-      type: String, // Clerk userId
+      type: String, 
       required: true,
     },
+    email:{
+        type: email, 
+      required: true, 
+    },
     name: {
-      type: String, // Clerk userId
+      type: String, 
       required: true,
     },
     doctor: {
@@ -20,7 +24,7 @@ const appointmentSchema = new mongoose.Schema(
       required: true,
     },
     timeSlot: {
-      type: String, // Example: "10:00 AM - 10:30 AM"
+      type: String, 
       required: true,
     },
     reason: {
@@ -32,9 +36,7 @@ const appointmentSchema = new mongoose.Schema(
       enum: ["pending", "confirmed", "cancelled", "completed"],
       default: "pending",
     },
-    notes: {
-      type: String,
-    },
+   
   },
   { timestamps: true }
 );
