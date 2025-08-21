@@ -14,7 +14,6 @@ router.put("/edit/:id", updateDoctor)
 // appointment api
 
 
-// 📌 Create a new appointment
 router.post("/book", createAppointment);
 router.get("/allappointment", getAllAppointments);
 router.get("/my/:id", getMyAppointments);
