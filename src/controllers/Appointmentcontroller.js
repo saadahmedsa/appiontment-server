@@ -1,5 +1,5 @@
 import Appointment from "../models/appointment.js";
-import { transporter } from "../utils/mailer.js";
+import { transporter } from "../../utils/mailer.js"
 
 export const createAppointment = async (req, res) => {
   try {
@@ -76,7 +76,7 @@ export const updateAppointment = async (req, res) => {
 
     if (status === "approved") {
       await transporter.sendMail({
-        from: process.env.SMTP_USER,
+        from: process.env.EMAIL_USER,
         to: patientEmail,
         subject: "Appointment Approved",
         html: `
@@ -88,7 +88,7 @@ export const updateAppointment = async (req, res) => {
       });
     } else if (status === "rejected") {
       await transporter.sendMail({
-        from: process.env.SMTP_USER,
+        from: process.env.EMAIL_USER,
         to: patientEmail,
         subject: "Appointment Unavailable ❌",
         html: `

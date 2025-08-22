@@ -7,8 +7,9 @@ const appointmentSchema = new mongoose.Schema(
       required: true,
     },
     email:{
-        type: email, 
-      required: true, 
+        type: String, 
+        unique:"true",
+        required: true, 
     },
     name: {
       type: String, 
