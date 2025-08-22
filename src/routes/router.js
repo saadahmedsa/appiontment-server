@@ -19,7 +19,7 @@ import { requireAdmin, requireuser } from "../middleware/index.js";
 const router = express.Router();
 
 // Users (Admin only)
-router.get("/users", requireuser, requireAdmin, getUser);
+router.get("/users",requireuser,requireAdmin,  getUser);
 
 //  Doctors
 router.post("/add", requireuser, requireAdmin, createDoctor);   

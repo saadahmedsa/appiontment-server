@@ -10,14 +10,17 @@ import router from "./src/routes/router.js";
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:3000", // your frontend
+  credentials: true,               // 👈 allow cookies
+}));
 app.use(cookieParser());
 app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("Hello Doctor app !");
 });
-app.use("/api/doctors", router);
+app.use("/api", router);
 
 connectDB()
   .then(() => {

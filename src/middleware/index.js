@@ -1,17 +1,24 @@
-import { Clerk } from "@clerk/clerk-sdk-node";
+import "dotenv/config"
+
+import { Clerk, verifyToken } from "@clerk/clerk-sdk-node";
 
 const clerkClient = new Clerk({ secretKey: process.env.CLERK_SECRET_KEY });
+
 
 // Middleware to check authentication
 export async function requireuser(req, res, next) {
   try {
-    const token = req.headers.authorization?.replace("Bearer ", "");
-    if (!token) return res.status(401).json({ error: "Missing token" });
+     let token =  req.cookies.__session;
 
-    const session = await clerkClient.sessions.verifySession(token);
-    if (!session) return res.status(401).json({ error: "Invalid session" });
 
-    req.userId = session.userId;
+    if (!token) {
+      return res.status(401).json({ error: "Missing token" });
+    }
+    
+
+    // Verify Clerk token
+    const decoded = await verifyToken(token, { secretKey: process.env.CLERK_SECRET_KEY });
+    req.userId = decoded.sub; // Clerk userId
     next();
   } catch (err) {
     return res.status(401).json({ error: "Unauthorized" });

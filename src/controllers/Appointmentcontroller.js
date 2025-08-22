@@ -5,7 +5,9 @@ export const createAppointment = async (req, res) => {
   try {
 
     const { doctor, date, reason,name,userId, timeSlot ,email} = req.body;
-
+//  if( !doctor ||  !doctor || !speciality || !degree || !experience || !about || !fees || !address)
+//       return      res.status(400).json({ success: false, message: "All feilds are required" });
+ 
     const appointment = await Appointment.create({
       patientId: userId,
       name,
