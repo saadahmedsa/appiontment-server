@@ -11,6 +11,7 @@ import {
   deleteAppointment,
   getAllAppointments,
   getMyAppointments,
+  getTodayAppointments,
   updateAppointment,
 } from "../controllers/Appointmentcontroller.js";
 import { getUser } from "../controllers/Usercontroller.js";
@@ -30,9 +31,9 @@ router.get("/all", getDoctors);         // public
 router.get("/single/:id", getDoctorById); // public
 
 //  Appointments
-router.post("/book", requireuser, createAppointment);
+router.post("/book",  createAppointment);
 router.get("/my/:id", requireuser, getMyAppointments); 
-
+router.get("/appointments/today", requireuser, requireAdmin,getTodayAppointments);
 router.get("/allappointment", requireuser, requireAdmin, getAllAppointments); 
 router.put("/update/:id", requireuser, requireAdmin, updateAppointment); 
 router.delete("/delete/:id", requireuser, requireAdmin, deleteAppointment); 

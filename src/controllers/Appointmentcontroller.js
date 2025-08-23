@@ -50,6 +50,23 @@ export const getAllAppointments = async (req, res) => {
 };
 
 
+export const getTodayAppointments = async (req, res) => {
+  try {
+    // Get today's start and end times
+    const today = new Date();
+    const startOfDay = new Date(today.setHours(0, 0, 0, 0));
+    const endOfDay = new Date(today.setHours(23, 59, 59, 999));
+
+    // Find appointments for today
+    const appointments = await Appointment.find({
+      createdAt: { $gte: startOfDay, $lte: endOfDay }
+    }).populate("doctor", "name speciality experience");
+
+    res.status(200).json({ success: true, data: appointments });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
 export const updateAppointment = async (req, res) => {
   try {
     const { id } = req.params;
