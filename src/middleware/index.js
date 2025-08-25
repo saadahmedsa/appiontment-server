@@ -1,5 +1,5 @@
 import "dotenv/config"
-
+import multer from "multer";
 import { Clerk, verifyToken } from "@clerk/clerk-sdk-node";
 
 const clerkClient = new Clerk({ secretKey: process.env.CLERK_SECRET_KEY });
@@ -38,3 +38,9 @@ export const requireAdmin = async (req, res, next) => {
     return res.status(403).json({ error: "Forbidden" });
   }
 };
+
+
+
+
+const storage = multer.memoryStorage(); // keep file in memory
+export const upload = multer({ storage });
