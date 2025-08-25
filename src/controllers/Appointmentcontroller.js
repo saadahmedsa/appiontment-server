@@ -41,8 +41,7 @@ const appointments = await Appointment.find({ patientId: id })
 export const getAllAppointments = async (req, res) => {
   try {
    
-   const appointments = await Appointment.find()
-  .populate("doctor", "name speciality experience"); 
+   const appointments = await Appointment.find().sort({ createdAt: -1 }).populate("doctor", "name speciality experience"); 
     res.status(200).json({ success: true, data: appointments });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
