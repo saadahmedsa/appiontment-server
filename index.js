@@ -18,7 +18,7 @@ app.use(cookieParser());
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send("Hello Doctor app !");
+  res.send("Hello Doctor app");
 });
 app.use("/api", router);
 
