@@ -42,5 +42,12 @@ export const requireAdmin = async (req, res, next) => {
 
 
 
-const storage = multer.memoryStorage(); // keep file in memory
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/"); // local temporary folder
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + "-" + file.originalname);
+  },
+});
 export const upload = multer({ storage });
